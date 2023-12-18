@@ -1,0 +1,360 @@
+<!-- <h1>addFactura</h1> -->
+<form id="myForm">
+  <div class="add-factura-form" id="add-factura-form">
+    <!-- <form id="formFactura" name ="formFactua"> -->
+    <!-- <div class="form-group">
+    <label for="factura-id" class="form-label">Factura ID</label>
+    <input type="text" class="form-control" id="factura-id" readonly>
+  </div>
+  <div class="form-group">
+    <label for="num-factura-id" class="form-label">N.Factura</label>
+    <input type="text" class="form-control" id="num-factura" readonly>
+  </div> -->
+    <!-- <div class="form-group">
+    <div class="row">
+     <div class="col-6">
+        <label for="timestamp-factura" class="form-label">Registre</label>
+        <input type="text" class="form-control timestamp-factura" id="timestamp-factura" name="timestamp-factura" readonly>
+      </div>
+      <div class="col-6">
+        <label for="usuari-factura" class="form-label">Usuari</label>
+        <input type="text" class="form-control usuari-factura" id="usuari-factura" name="usuari-factura" readonly>
+      </div>
+    </div>
+  </div> -->
+    <!--Form group-->
+
+    <fieldset class="mt-3 border border-secondary rounded-3 border-3">
+      <legend>Informació Comptable</legend>
+      <div class="row mt-3">
+        <!--Departament o Programa-->
+        <div class="col-4 me-auto">
+          <div class="form-floating">
+            <select class="form-select select-programes" id="select-programes" name="select-programes" aria-label="Programa">
+           <!--  <option selected>Departament/ Programa</option>
+            <option value="1">One</option>
+            <option value="2">Two</option>
+            <option value="3">Three</option> -->
+          </select>
+            <label for="select-programes">Selecciona una opció</label>
+          </div>
+        </div>
+        <!--Fi Departament o Programa-->
+        <!-- <div class="row mt-3"> -->
+        <!--Llistat Departaments o Programes-->
+        <div class="col-4 me-auto">
+          <div class="form-floating">
+            <select class="form-select select-departaments" id="select-departaments" name="select-departaments" aria-label="Departament" disabled>
+           <!--  <option selected>Departament/ Programa</option>
+            <option value="1">One</option>
+            <option value="2">Two</option>
+            <option value="3">Three</option> -->
+          </select>
+            <label for="select-departaments">Selecciona una opció</label>
+          </div>
+        </div>
+
+        <div class="col-4 me-auto">
+          <div class="form-floating mb-3">
+            <input type="text"  class="form-control" id="info-concepte" placeholder="Comissió, programa, activitat,taller..." name="info-concepte">
+            <label for="info-concepte">Comissió, activitat, taller...</label>
+          </div>
+        </div>
+
+      </div>
+      <!--Fi Departament o Programa-->
+
+      <div class="row mt-3">
+        <div class="col-4 me-auto">
+          <div class="form-floating mb-3">
+            <select class="form-select select-tipus" id="select-tipus"  name="select-tipus" aria-label="Tipus document">
+               <!-- <option selected>Tipus document</option>
+                    <option value="1">Tiquet</option>
+                    <option value="2">Factura</option>
+                    <option value="3">Albarà</option>
+                    <option value="3">Abono</option> -->
+              </select>
+            <label for="select-tipus">Selecciona document</label>
+          </div>
+        </div>
+
+        <div class="form-check col-auto me-auto ">
+          <input class="form-check-input" type="radio" name="pagament-usuari" id="pagament-usuari-pendent" checked>
+          <label class="form-check-label" for="pagament-usuari-pendent" >Factura pendent de pagament</label>
+        </div>
+        <div class="form-check col-auto me-auto ">
+          <input class="form-check-input" type="radio" name="pagament-usuari" id="pagament-usuari-fet">
+          <label class="form-check-label" for="pagament-usuari-fet" >Factura pagada pel/ per la mestr@</label>
+        </div>
+      </div><!-- div Tipus i pagament -->
+    </fieldset>
+
+
+
+
+
+    <fieldset class="mt-3 border border-secondary rounded-3 border-3">
+      <legend>Dades Factura</legend>
+      <div class="form-group">
+        <div class="row mt-3">
+          <div class="col-auto me-auto mt-auto">
+            <div class="form-floating mb-3">
+              <input type="date" class="form-control data-factura"  id="data-factura" name="data-factura">
+              <label for="data-factura">Data Factura</label>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-floating">
+          <div class="row mt-3">
+            <div class="col-6 me-auto">
+              <div class="form-floating mb-3">
+                <input type="text" class="form-control nom-empresa" id="nom-empresa" name="nom-empresa"placeholder="Nom Empresa">
+                <label for="nom-empresa">Nom Empresa</label>
+              </div>
+            </div>
+            <div class="col-6 me-auto">
+              <div class="form-floating mb-3">
+                <input type="text" class="form-control cif-empresa" id="cif-empresa" name="cif-empresa" placeholder="CIF/NIF Empresa">
+                <label for="cif-empresa">CIF/NIF Empresa</label>
+              </div>
+            </div>
+
+          </div>
+          <div class="form-group">
+            <div class="row mt-3">
+              <div class="col-3 me-auto">
+                <div class="form-floating mb-3">
+                  <input type="text" class="form-control num-factura" id="num-factura" name="num-factura" placeholder="N.Factura">
+                  <label for="num-factura">N.Factura</label>
+                </div>
+              </div>
+
+              <div class="col-3 me-auto">
+                <div class="form-floating mb-3">
+                  <input type="text" class="form-control importe-factura" id="importe-factura" name="importe-factura"placeholder="Import €">
+                  <label for="importe-factura">Import €</label>
+                </div>
+              </div>
+              <div class="col-6 me-auto">
+                <div class="form-floating mb-3">
+                  <input type="text" class="form-control concepte-factura" id="concepte-factura" name="concepte-factura" placeholder="Concepte">
+                  <label for="concepte-factura">Concepte</label>
+                </div>
+
+              </div>
+            </div>
+          </div>
+    </fieldset>
+    <fieldset class="mt-3 border border-secondary rounded-3 border-3">
+      <legend>Informació Adjunta</legend>
+      <div class="form-floating">
+        <div class="row  mt-3">
+          <div class="input-group col-auto me-auto">
+            <input type="file" class="form-control file" id="file" name="file">
+           <!--  <label class="input-group-text" for="file">Seleccionar arxiu</label> -->
+            <input type="text" class="form-control link-archivo" id="link-archivo" name="link-archivo" >
+          </div>
+        </div>
+      </div>
+
+      <div class="form-floating mt-3">
+        <textarea class="form-control observacions-factura" placeholder="Observacions" id="observacions-factura" name="observacions-factura"></textarea>
+        <label for="observacions-factura">Observacions</label>
+      </div>
+    </fieldset>
+
+    <fieldset class="mt-3 border border-secondary rounded-3 border-3 d-none">
+      <legend>Registre Comptable</legend>
+      <div class="form-floating">
+        <div class="row mt-3">
+          <div class="col-4 me-auto">
+            <div class="form-floating mb-3">
+              <select class="form-select select-tipus-pagament" id="select-tipus-pagament" name="select-tipus-pagament" aria-label="Tipus pagament">
+                 <!-- <option selected>Tipus document</option>
+                      <option value="1">Tiquet</option>
+                      <option value="2">Factura</option>
+                      <option value="3">Albarà</option>
+                      <option value="3">Abono</option> -->
+                </select>
+              <label for="select-tipus-pagament">Selecciona tipus de pagament</label>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-4 me-auto mt-auto">
+        <div class="form-floating mb-3">
+          <input type="date" class="form-control" id="data-pagament" name="data-pagament">
+          <label for="data-pagament">Data Pagament</label>
+        </div>
+      </div>
+      <div class="col-4 me-auto">
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" name="flexCheckDefault">
+          <label class="form-check-label" for="flexCheckDefault">Default checkbox</label>
+        </div>
+      </div>
+
+    </fieldset>
+
+
+    <div class="form-group mt-3 text-center">
+      <button class="btn btn-primary btnAddFactura" id="save-changes">Desa</button>
+       <!-- Button trigger modal -->
+    <!--   <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#enviarModal" id="enviarModalB">
+            Enviar</button> -->
+      <button class="btn btn-danger" id="cancel-changes">Cancel·la</button>
+    </div>
+  </div>
+</form>
+ 
+<!-- Modal -->
+<!-- <div class="modal fade" id="enviarModal" tabindex="-1" aria-labelledby="enviarModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-xl">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="enviarModalLabel">Modal title</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body" id = "modal-body">
+
+        <fieldset class="mt-3 border border-secondary rounded-3 border-3">
+      <legend>Informació Comptable</legend>
+      <div class="row mt-3">
+ -->       <!--Departament o Programa-->
+  <!--       <div class="col-4 me-auto">
+          <div class="form-floating">
+             <input type="text"  class="form-control modal-select-programes" id="modal-select-programes" name="modal-select-programes" readonly>
+             <label for="modal-select-programes">Programa</label>
+          </div>
+        </div> -->
+        <!--Fi Departament o Programa-->
+        <!-- <div class="row mt-3"> -->
+        <!--Llistat Departaments o Programes-->
+<!--         <div class="col-4 me-auto">
+          <div class="form-floating">
+             <input type="text"  class="form-control modal-select-departaments" id="modal-select-departaments" name="modal-select-departaments" readonly>
+             <label for="modal-select-departaments">Departament</label>
+          </div>
+        </div>
+
+        <div class="col-4 me-auto">
+          <div class="form-floating mb-3">
+            <input type="text"  class="form-control modal-info-concepte" id="modal-info-concepte" name="modal-info-concepte" readonly>
+            <label for="modal-info-concepte">Informació</label>
+            
+          </div>
+        </div>
+
+      </div> -->
+      <!--Fi Departament o Programa-->
+
+<!--       <div class="row mt-3">
+        <div class="col-4 me-auto">
+          <div class="form-floating mb-3">
+             <input type="text"  class="form-control modal-select-tipus" id="modal-select-tipus" name="modal-select-tipus" readonly>
+             <label for="modal-select-tipus">Document</label>
+          </div>
+        </div>
+
+        <div class="form-check col-auto me-auto ">
+          <input class="form-check-input" type="radio" name="pagament-usuari" id="pagament-usuari-pendent">
+          <label class="form-check-label" for="pagament-usuari-pendent" >Factura pendent de pagament</label>
+        </div>
+        <div class="form-check col-auto me-auto ">
+          <input class="form-check-input" type="radio" name="pagament-usuari" id="pagament-usuari-fet">
+          <label class="form-check-label" for="pagament-usuari-fet" >Factura pagada pel/ per la mestr@</label>
+        </div>
+      </div><!-- div Tipus i pagament -->
+ <!--    </fieldset>
+
+
+  <fieldset class="mt-3 border border-secondary rounded-3 border-3">
+      <legend>Dades Factura</legend>
+      <div class="form-group">
+        <div class="row mt-3">
+          <div class="col-auto me-auto mt-auto">
+            <div class="form-floating mb-3">
+              <input type="text" class="form-control modal-data-factura"  id="modal-data-factura" name="modal-data-factura" readonly>
+              <label for="modal-data-factura">Data Factura</label>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-floating">
+          <div class="row mt-3">
+            <div class="col-6 me-auto">
+              <div class="form-floating mb-3">
+                <input type="text" class="form-control modal-nom-empresa" id="modal-nom-empresa" name="modal-nom-empresa" readonly>
+                <label for="modal-nom-empresa">Nom Empresa</label>
+              </div>
+            </div> --> 
+        <!--     <div class="col-6 me-auto">
+              <div class="form-floating mb-3">
+                <input type="text" class="form-control modal-cif-empresa" id="modal-cif-empresa" name="modal-cif-empresa" readonly">
+                <label for="modal-cif-empresa">CIF/NIF Empresa</label>
+              </div>
+            </div>
+          </div> -->
+   
+ <!--           <div class="form-group">
+            <div class="row mt-3">
+              <div class="col-3 me-auto">
+                <div class="form-floating mb-3">
+                  <input type="text" class="form-control modal-num-factura" id="modal-num-factura" name="modal-num-factura" readonly>
+                  <label for="modal-num-factura">N.Factura</label>
+                </div>
+              </div> 
+
+            <div class="col-3 me-auto">
+                <div class="form-floating mb-3">
+                  <input type="text" class="form-control modal-importe-factura" id="modal-importe-factura" name="modal-importe-factura" readonly>
+                  <label for="modal-importe-factura">Import €</label>
+                </div>
+              </div>
+
+             <div class="col-6 me-auto">
+                <div class="form-floating mb-3">
+                  <input type="text" class="form-control modal-concepte-factura" id="modal-concepte-factura" name="modal-concepte-factura" readonly>
+                  <label for="modal-concepte-factura">Concepte</label>
+                </div>
+              </div>
+
+            </div>
+          </div>
+    </fieldset> 
+
+
+<fieldset class="mt-3 border border-secondary rounded-3 border-3">
+      <legend>Informació Adjunta</legend>
+      <div class="form-floating">
+        <div class="row  mt-3">
+          <div class="input-group col-auto me-auto">
+            <input type="file" class="form-control file" id="file" name="file">
+           <!--  <label class="input-group-text" for="file">Seleccionar arxiu</label> -->
+<!--             <input type="text" class="form-control modal-link-archivo" id="modal-link-archivo" name="modal-link-archivo" hidden>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-floating mt-3">
+        <textarea class="form-control modal-observacions-factura" placeholder="Observacions" id="modal-observacions-factura" name="modal-observacions-factura"></textarea>
+        <label for="modal-observacions-factura">Observacions</label>
+      </div>
+    </fieldset>
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal2" id = "save">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div> --> 
+<!-- Fin Modal 1-->
+
+
+    <div class="alert alert-success invisible mt-3" id="save-success-message" role="alert">
+      Canvis Desats!
+    </div>
+

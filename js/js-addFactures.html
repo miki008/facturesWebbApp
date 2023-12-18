@@ -1,0 +1,156 @@
+<script>
+ 
+function addFactura(){
+//const enviaInvitaciones = document.getElementById("formEnvioAvisoActivitat");
+let pagadorFactura = document.getElementById("pagament-usuari-fet").checked;
+//if (pagadorFactura == true ){ let estadoPago = 'TRUE'} else {let estadoPago = 'FALSE'} 
+ let facturaInfo = {};
+
+  //facturaInfo.timestap = document.getElementById("timestamp-factura").value;
+  //facturaInfo.usuari = document.getElementById("usuari-factura").value;
+  facturaInfo.selectprogrames = document.getElementById("select-programes").value;
+  facturaInfo.selectdepartaments = document.getElementById("select-departaments").value;
+  facturaInfo.infoconcepte = document.getElementById("info-concepte").value;
+  facturaInfo.selecttipus = document.getElementById("select-tipus").value;
+  if (pagadorFactura == true ){ facturaInfo.estadoPago = 'TRUE'} else {facturaInfo.estadoPago = 'FALSE'}
+  //facturaInfo.pagamentusuaripendent = document.getElementById("pagament-usuari-pendent").value;
+  //facturaInfo.pagamentusuarifet = document.getElementById("pagament-usuari-fet").value;
+  facturaInfo.datafactura = document.getElementById("data-factura").value;
+  facturaInfo.nomempresa = document.getElementById("nom-empresa").value;
+  facturaInfo.cifempresa = document.getElementById("cif-empresa").value;
+  facturaInfo.numfactura = document.getElementById("num-factura").value;
+  facturaInfo.importefactura = document.getElementById("importe-factura").value;
+  facturaInfo.conceptefactura = document.getElementById("concepte-factura").value;
+  facturaInfo.arxiufactura = document.getElementById("link-archivo").value;
+  facturaInfo.observacionsfactura = document.getElementById("observacions-factura").value;
+  //facturaInfo.selecttipuspagament = document.getElementById("select-tipus-pagament").value; 
+
+const miFormulario = document.getElementById("myForm");
+//google.script.run.withSuccessHandler(function(){
+  google.script.run.withSuccessHandler(result=>{
+  miFormulario.reset();
+//document.getElementById("timestamp-factura").value = " ";
+//document.getElementById("usuari-factura").value = " ";
+//document.getElementById("select-programes").value = " ";
+//document.getElementById("select-departaments").value = " ";
+//document.getElementById("info-concepte").value = " ";
+//document.getElementById("select-tipus").value = " ";
+//document.getElementById("pagament-usuari-pendent").checked = false;
+//document.getElementById("pagament-usuari-fet").checked = false;
+//document.getElementById("data-factura").value = " ";
+//document.getElementById("nom-empresa").value = " ";
+//document.getElementById("cif-empresa").value = " ";
+//document.getElementById("num-factura").value = " ";
+//document.getElementById("importe-factura").value = " ";
+//document.getElementById("concepte-factura").value = " ";
+//document.getElementById("arxiu-factura").value = " ";
+//document.getElementById("link-archivo").value = " ";
+//document.getElementById("observacions-factura").value = " ";
+//document.getElementById("select-tipus-pagament").value = " "; 
+
+
+
+      document.getElementById("save-success-message").classList.remove("d-none");
+
+    loadingEnd();
+  setTimeout(function(){
+    document.getElementById("save-success-message").classList.add("d-none");
+    },2000);
+  }).addFactura(facturaInfo);
+ 
+}
+
+ function enviarform(form){
+      //console.log(form);
+        event.preventDefault();
+        const button = document.getElementById("save-changes");
+        const miFormulario = document.getElementById("myForm");
+        button.disabled = true;
+loadingStart();
+        google.script.run
+         .withSuccessHandler( fileUrl => {
+            
+            const linkURL = `${fileUrl}`;
+            document.getElementById("link-archivo").value = linkURL;
+             
+            //alert('Archivo subido correctamente. \n\nEl url del archivo es: \n' + linkURL);
+            //let miFormularioalert("archivo subido correctamente");
+            loadingEnd();
+            //alert(`Archivo subido correctamente. \n\nEl url del archivo es: \n ${fileUrl}`);
+            button.disabled = false;
+             
+          })  
+
+          
+         .withFailureHandler( error => {
+            alert(`Algo salió mal. Vuelve a intentarlo \nError: ${error}`);
+            //button.disabled = false;
+          }) 
+          .uploadFiles (form);
+         
+//console.log(form);
+    }
+ 
+
+/* function enviarLink(fileUrl){
+ const linkURL = `${fileUrl}`;
+ //alert(`Archivo subido correctamente. \n\nEl url del archivo es: \n ${fileUrl}`);
+ alert("miki");
+ document.getElementById("link-archivo").value = linkURL;
+
+}
+
+    function selectError(){
+  alert ("error");
+} */
+
+/* function enviarLink(){
+ alert(`Archivo subido correctamente. \n\nEl url del archivo es: \n ${fileUrl}`);
+
+            button.disabled = false;
+
+}
+function selectError(error){
+  alert(`Algo salió mal. Vuelve a intentarlo \nError: ${error}`);
+            button.disabled = false;
+}  */
+
+//**************PLANTILLA******************\\
+/*
+function loadSelectDepartaments(){
+//loadingStart();
+google.script.run
+.withSuccessHandler(insertarListarDepartaments)
+.withFailureHandler( selectError) 
+.loadSelectDepartaments(document.querySelector(".select-programes").value);
+}
+
+function selectError(error){
+  alert ("error");
+} 
+
+function insertarListarDepartaments( listaProgrames){
+ // console.log("hola miki");
+//const data = insertarListarDepartaments.slice();
+let selectDepartaments = document.querySelector('.select-departaments');
+selectDepartaments.disabled = false;
+selectDepartaments.options.length = 0;
+
+listaProgrames.forEach( element => {
+  let optionDepartaments = document.createElement('option');
+  optionDepartaments.value = element;
+  optionDepartaments.innerHTML = element;
+  selectDepartaments.appendChild(optionDepartaments);
+
+});
+
+}
+
+function selectError(){
+  alert ("error");
+}
+
+
+
+*/
+</script>

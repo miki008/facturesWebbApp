@@ -1,0 +1,90 @@
+<script>
+  let data;
+  function loadView(options){
+  let id= typeof options.id === "undefined" ? "app" : options.id;
+  let cb= typeof options.callback === "undefined" ? function(){} : options.callback;
+  loadingStart();
+  google.script.run.withSuccessHandler(function(html){
+  document.getElementById(id).innerHTML = html;
+  loadingEnd();
+  typeof options.callback === "undefined" ? cb() : cb(options.params);
+  })[options.func]();
+  }
+  
+function loadingStart(){
+  document.getElementById("loading").classList.remove("invisible");
+}
+
+function loadingEnd(){
+  document.getElementById("loading").classList.add("invisible");
+}
+
+function activTabChange(e){
+
+const navLinks = document.querySelectorAll(".main-nav .nav-link");
+
+navLinks.forEach(function(linkEl){
+
+  linkEl.classList.remove("active");
+});
+e.target.classList.add("active");
+
+}
+
+function navClickEventHandler(e){
+if(e.target.matches(".nav-link")){
+  activTabChange(e);
+  }
+}
+
+// FUNCIONES ENCARGADAS DE MOSTRAR FACTURAS
+// PENDIENTES DE CONTABILIZAR EN EL ECOIB
+function  loadIniciView() {
+//loadView({func: "loadIniciView"});
+loadView({func: "loadIniciView", callback:listarFacturesPendents}); 
+//loadView({func: "loadIniciView", callback:loadSelectProgrames});
+//loadView({func: "loadIniciView", callback:loadSelectTipusDocument});
+//loadView({func: "loadIniciView", callback: loadSelectTipusPagament});
+  }
+
+
+function  loadAddFacturaView() {
+//loadView({func: "loadAddFacturaView"});
+//loadView({func: "loadAddFacturaView", callback:listarUsuario});
+//loadView({func: "loadAddFacturaView", callback:listarTimestamp});
+loadView({func: "loadAddFacturaView", callback:loadSelectProgrames});
+loadView({func: "loadAddFacturaView", callback:loadSelectTipusDocument});
+loadView({func: "loadAddFacturaView", callback: loadSelectTipusPagament});
+
+  } 
+
+
+
+
+// FUNCIONES ENCARGADAS DE MOSTRAR TODAS LAS FACTURAS
+function  loadShowFacturasView() {
+loadView({func: "loadShowFacturasView", callback: listarFactures});
+  } 
+
+ 
+//FUNCIONES BARA BUSCAR UNA FACTURA
+function  loadSearchFacturaView() {
+loadView({func: "loadSearchFacturaView",callback: setDataFormSearch});
+  } 
+
+
+// Eventos de cada pestaña del nav
+document.getElementById("inici-link").addEventListener("click",loadIniciView);  
+document.getElementById("afegir-factura-link").addEventListener("click",loadAddFacturaView);
+document.getElementById("mostrar-factures-link").addEventListener("click",loadShowFacturasView);
+document.getElementById("cercar-factura-link").addEventListener("click",loadSearchFacturaView);
+
+//Evento general para llamar a los elementos del navbar
+document.getElementById("navigation").addEventListener("click",navClickEventHandler); 
+
+//Evento general para llamar a la página de inicio
+document.addEventListener("DOMContentLoaded",loadIniciView);
+
+
+
+</script>

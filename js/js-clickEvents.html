@@ -1,0 +1,83 @@
+<script>
+  function clickEventHandler(e){
+
+if (e.target.matches(".btnAddFactura")){
+/* //console.log("Error")
+
+var miFormulario = document.getElementById("myForm");
+// Agregar un listener para el evento 'submit'
+event.preventDefault(); // Evitar el comportamiento por defecto del envío del formulario
+enviarform(miFormulario); // Llamar a la función que maneja el envío del formulario
+*/
+/* let miFormulario = document.getElementById("myForm");
+// Agregar un listener para el evento 'submit'
+event.preventDefault(); // Evitar el comportamiento por defecto del envío del formulario
+enviarform(miFormulario); // Llamar a la función que maneja el envío del formulario */
+addFactura();
+
+
+} 
+
+//if (e.target.matches(".enviarModal")){}
+
+if(e.target.matches(".button-ver")){
+
+// Sustituye //onclick = "abrirFacturaPDF(this)"
+const buttonVerFactura = e.target;
+//console.log(buttonVerFactura);
+
+abrirFacturaPDF(buttonVerFactura);
+
+} 
+
+/*if(e.target.matches(".button-edit")){
+
+loadSelectProgrames();
+loadSelectTipusDocument();
+//loadSelectTipusPagament();
+alert("Estàs intentant editar l'estat d'una factura");
+  //loadEditArticleView(e);
+
+  }*/
+
+/*f(e.target.matches("#select-programes-modal")){
+alert("mikimiki");
+//document.getElementById('select-departaments-modal').disabled = false;
+//loadSelectDepartaments();
+  }  
+  */
+
+  /* if(e.target.matches(".button-delete")){
+    alert("NO està permés esborrar factures");
+  } */
+
+/* if(e.target.matches(".before-delete-button")){
+    displayConfirmationDelete(e);
+  } */
+
+/* if(e.target.matches(".edit-button")){
+
+  loadEditArticleView(e);
+
+  } */
+
+  //if(e.target.matches("#save-changes")){
+  //editArticle();
+
+    //loadSearchView();
+ // }
+  
+  if(e.target.matches("#cancel-changes")){
+   loadSearchView();
+  }
+ if(e.target.matches("#add-article-button")){
+    addArticle();
+  } 
+
+}
+
+document.getElementById("app").addEventListener("click",clickEventHandler);
+
+
+
+</script>

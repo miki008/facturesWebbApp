@@ -1,0 +1,63 @@
+<script>
+  
+function listarFacturesPendents(){
+  loadingStart();
+  google.script.run
+  .withSuccessHandler(actualizarFacturesPendents)
+  .listarFacturesPendents();
+ loadingEnd();
+} 
+
+function actualizarFacturesPendents(dataValueFacturesPendents){
+loadingStart();
+let tableBody = document.getElementById("tableBody-factures-pendents");
+let template = document.getElementById("rowTemplate-factures-pendents");
+let templateContent = template.content;
+
+tableBody.innerHTML = " ";
+
+dataValueFacturesPendents.forEach (function(facturaPendent){
+  const tr = templateContent.cloneNode(true);
+
+  const numFacturaIdCol = tr.querySelector(".template-numFacturaId");
+  //const formaPagamentCol = tr.querySelector(".template-formaPagament"); 
+  //const dataPagamentCol = tr.querySelector("template-dataPagament"); 
+  //const inputEcoibCol = tr.querySelector("template-inputEcoib"); 
+  const departamentProgramaCol = tr.querySelector(".template-departamentPrograma");
+  const nomEmpresaCol = tr.querySelector(".template-nomEmpresa");
+  const cifEmpresaCol = tr.querySelector(".template-cifEmpresa");
+  const importFacturaCol = tr.querySelector(".template-importFactura");
+  const dataFacturaCol = tr.querySelector(".template-dataFactura");
+  const numFacturaCol = tr.querySelector(".template-numFactura");
+  const linkFacturaCol = tr.querySelector(".template-linkFactura");
+  const concepteFacturaCol = tr.querySelector(".template-concepteFactura");
+  const pagamentUsuariCol = tr.querySelector(".template-pagamentUsuari"); 
+  const observacionsFacturaCol = tr.querySelector(".template-observacionsFactura");
+  const buttonsButton = tr.querySelector(".template-buttons");
+
+numFacturaIdCol.textContent = facturaPendent[0];
+//formaPagamentCol.textContent = facturaPendent[1]; 
+//dataPagamentCol.textContent = facturaPendent[2]; 
+//inputEcoibCol.textContent =facturaPendent[3]; 
+//departamentProgramaCol.textContent = facturaPendent[4];
+nomEmpresaCol.textContent = facturaPendent[5];
+cifEmpresaCol.textContent = facturaPendent[6];
+importFacturaCol.textContent = facturaPendent[7];
+dataFacturaCol.textContent = facturaPendent[8];
+numFacturaCol.textContent = facturaPendent[9];
+linkFacturaCol.textContent = facturaPendent[10];
+concepteFacturaCol.textContent = facturaPendent[11];
+//pagamentUsuariCol.textContent = facturaPendent[12]; 
+observacionsFacturaCol.textContent = facturaPendent[13]; 
+buttonsButton.dataset.facturaId = facturaPendent[15];
+
+tableBody.appendChild(tr);
+});
+loadingEnd();
+} 
+// FIN FUNCIONES FACTURAS PENDIENTES DE CONTABILIZAR EN EL ECOIB
+
+
+
+
+  </script>

@@ -1,0 +1,109 @@
+<script>
+
+
+
+
+
+//*****FUNCIONES PARA CREAR LOS SELECTS DINÁMICOS**************************************//
+
+function loadSelectProgrames(){
+//loadingStart();
+
+google.script.run.withSuccessHandler(function(insertarListarProgrames){
+
+const data = insertarListarProgrames.slice().sort();
+const selectProgrames = document.querySelector(".select-programes");
+const fragment = document.createDocumentFragment();
+data.forEach(function (res) {
+if (res != ' '){
+const optionProgrames = document.createElement('option');
+optionProgrames.textContent = res;
+fragment.appendChild(optionProgrames);
+      }
+                });
+selectProgrames.appendChild(fragment);
+//M.FormSelect.init(selectProgrames);
+//loadingEnd();
+//document.querySelector('.selects').classList.remove("hide");
+}).loadSelectProgrames();
+}
+
+
+function loadSelectDepartaments(){
+//loadingStart();
+google.script.run
+.withSuccessHandler(insertarListarDepartaments)
+.withFailureHandler( selectError) 
+.loadSelectDepartaments(document.querySelector(".select-programes").value);
+}
+
+function selectError(error){
+  alert ("error");
+} 
+
+function insertarListarDepartaments( listaProgrames){
+ // console.log("hola miki");
+//const data = insertarListarDepartaments.slice();
+let selectDepartaments = document.querySelector('.select-departaments');
+selectDepartaments.disabled = false;
+selectDepartaments.options.length = 0;
+
+listaProgrames.forEach( element => {
+  let optionDepartaments = document.createElement('option');
+  optionDepartaments.value = element;
+  optionDepartaments.innerHTML = element;
+  selectDepartaments.appendChild(optionDepartaments);
+
+});
+
+}
+
+function selectError(){
+  alert ("error");
+}
+
+
+
+function loadSelectTipusDocument(){
+//loadingStart();
+google.script.run.withSuccessHandler(function(insertarListarTipusDocument){
+
+const data = insertarListarTipusDocument.slice().sort();
+const selectTipusDocument = document.querySelector(".select-tipus");
+const fragment = document.createDocumentFragment();
+data.forEach(function (res) {
+if (res != ''){
+const optionProgrames = document.createElement('option');
+optionProgrames.textContent = res;
+fragment.appendChild(optionProgrames);
+      }
+                });
+selectTipusDocument.appendChild(fragment);
+//M.FormSelect.init(selectProgrames);
+//loadingEnd();
+//document.querySelector('.selects').classList.remove("hide");
+}).loadSelectTipusDocument();
+}
+
+function loadSelectTipusPagament(){
+//loadingStart();
+google.script.run.withSuccessHandler(function(insertarListarTipusPagament){
+
+const data = insertarListarTipusPagament.slice().sort();
+const selectTipusPagament = document.querySelector(".select-tipus-pagament");
+const fragment = document.createDocumentFragment();
+data.forEach(function (res) {
+if (res != ''){
+const optionPagaments = document.createElement('option');
+optionPagaments.textContent = res;
+fragment.appendChild(optionPagaments);
+      }
+                });
+selectTipusPagament.appendChild(fragment);
+//M.FormSelect.init(selectProgrames);
+//loadingEnd();
+//document.querySelector('.selects').classList.remove("hide");
+}).loadSelectTipusPagament();
+}
+
+</script>

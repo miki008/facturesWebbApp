@@ -1,0 +1,73 @@
+<script>
+
+// FUNCIONES ENCARGADAS DE MOSTRAR TODAS LAS FACTURAS
+ function listarFactures(){
+  loadingStart();
+  google.script.run
+  .withSuccessHandler(mostrarFactures)
+  .listarFactures();
+ //loadingEnd();
+}
+
+function mostrarFactures(dataFactures){
+//loadingStart();
+const tableBody = document.getElementById("tableBody-factures");
+const template = document.getElementById("rowTemplate-factures");
+const templateContent = template.content;
+
+tableBody.innerHTML = " ";
+
+dataFactures.forEach (function(factura){
+  const tr = templateContent.cloneNode(true);
+
+  const numFacturaIdCol = tr.querySelector(".template-numFacturaId");
+  const formaPagamentCol = tr.querySelector(".template-formaPagament"); 
+  const dataPagamentCol = tr.querySelector(".template-dataPagament"); 
+  const inputEcoibCol = tr.querySelector(".template-inputEcoib"); 
+  //const departamentProgramaCol = tr.querySelector(".template-departamentPrograma");
+  const nomEmpresaCol = tr.querySelector(".template-nomEmpresa");
+  const cifEmpresaCol = tr.querySelector(".template-cifEmpresa");
+  const linkFacturaCol = tr.querySelector(".template-linkFactura");
+  const importFacturaCol = tr.querySelector(".template-importFactura");
+  const dataFacturaCol = tr.querySelector(".template-dataFactura");
+  //const numFacturaCol = tr.querySelector(".template-numFactura");
+  //const concepteFacturaCol = tr.querySelector(".template-concepteFactura"); 
+  //const pagamentUsuariCol = tr.querySelector(".template-pagamentUsuari"); 
+  // observacionsFacturaCol = tr.querySelector(".template-observacionsFactura"); 
+  //const responsableFacturaCol = tr.querySelector(".template-responsableFactura"); 
+  const buttonsButton = tr.querySelector(".template-buttons");
+
+numFacturaIdCol.textContent = factura[0];
+formaPagamentCol.textContent = factura[1];
+dataPagamentCol.textContent = factura[2];
+const estatEcoib = factura[3];
+ if (estatEcoib === 'TRUE'){tr.querySelector(".bi-check-lg").classList.remove("d-none")}
+else{tr.querySelector(".bi-x-lg").classList.remove("d-none")}
+
+//inputEcoibCol.textContent =factura[3]; 
+//departamentProgramaCol.textContent = factura[4];
+nomEmpresaCol.textContent = factura[5];
+cifEmpresaCol.textContent = factura[6];
+importFacturaCol.textContent = factura[7];
+dataFacturaCol.textContent = factura[8];
+//numFacturaCol.textContent = factura[9];
+linkFacturaCol.textContent = factura[10];
+//concepteFacturaCol.textContent = factura[11];
+//pagamentUsuariCol.textContent = factura[12];
+//observacionsFacturaCol.textContent = factura[13];
+//responsableFacturaCol.textContent = factura[14];
+buttonsButton.dataset.facturaId = factura[15];
+
+tableBody.appendChild(tr);
+});
+loadingEnd();
+}
+// FIN FUNCIONES ENCARGADAS DE MOSTRAR TODAS LAS FACTURAS
+
+
+
+
+
+
+
+  </script>

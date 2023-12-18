@@ -1,0 +1,24 @@
+<script>
+
+function inputEventHandler(e){
+  if(e.target.matches("#searchInput")){
+    search();
+  }
+
+//Cuando cambia de valor el select programa/ departament
+// se activa el select con el listado de programes o departaments
+if(e.target.matches("#select-programes")){
+loadSelectDepartaments();
+  }
+
+  if(e.target.matches("#select-programes-modal")){
+alert("mikimiki");
+//document.getElementById('select-departaments-modal').disabled = false;
+//loadSelectDepartaments();
+  }
+
+}
+
+
+document.getElementById("app").addEventListener("input",inputEventHandler); 
+</script>

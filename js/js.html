@@ -1,0 +1,260 @@
+ <script>
+ 
+function listarUsuario(){
+//loadingStart();
+google.script.run
+.withSuccessHandler(obtenerUsuario)
+.obtenerUsuario();
+//loadingEnd();
+}
+
+function obtenerUsuario(user){
+//console.log (usuario);
+document.querySelector(".usuari-factura").value = user;
+
+  }
+
+
+function listarTimestamp(){
+//loadingStart();
+google.script.run
+.withSuccessHandler(obtenerTimestamp)
+.obtenerTimestamp();
+//loadingEnd();
+}
+
+
+function obtenerTimestamp(timestamp)
+{
+
+document.querySelector(".timestamp-factura").value = timestamp;
+ 
+}
+
+
+//OBTENER FACTURA PDF
+function abrirFacturaPDF(buttonVerFactura){
+
+//console.log(buttonVerFactura);
+const tableRow = buttonVerFactura.parentNode.parentNode;
+//console.log (tableRow);
+const linkFacturaPDF = tableRow.querySelector(".template-linkFactura").textContent;
+window.open(linkFacturaPDF, "Factura", "width=1200, height=1000")
+
+}
+
+
+
+/* function listarUsuario(){
+loadingStart();
+google.script.run
+.withSuccessHandler(obtenerUsuario)
+.listarUsuario();
+loadingEnd();
+}
+
+function obtenerUsuario(usuario){
+//console.log (usuario);
+document.getElementById("usuari-factura").value = usuario;
+
+  } */
+
+
+// FIN FUNCIONES MOSTRAR FACTURAS 
+
+function displayConfirmationDelete(e){
+if(e.target.dataset.buttonState === "delete"){
+e.target.previousElementSibling.classList.remove("d-none");
+e.target.textContent = "Cancel·la";
+e.target.dataset.buttonState = "cancel";
+} else {
+e.target.previousElementSibling.classList.add("d-none");
+e.target.textContent = "Esborrar";
+e.target.dataset.buttonState = "delete";
+ }
+}
+
+function deleteArticle(e){
+
+var artID = e.target.dataset.articleId;
+ loadingStart();
+google.script.run.withSuccessHandler(function(){
+ e.target.closest(".result-box").remove();
+ var ids = data.map(function(r){return r[0].toString().toLowerCase() });
+ var index = ids.indexOf(artID.toString().toLowerCase());
+ data.splice(index,1);
+  loadingEnd();
+}).deleteById(artID);
+
+}
+
+function afterEditViewLoads(params){
+//artID: e.target.dataset.articleId
+//loading
+loadingStart();
+document.getElementById("article-id").value = params.artID;
+google.script.run.withSuccessHandler(function(articleInfo){
+  document.getElementById("aula").value = articleInfo.nAula;
+  //document.getElementById("article").value = articleInfo.nArticle;
+  document.getElementById("tipus").value = articleInfo.nTipus;
+  document.getElementById("objecte").value = articleInfo.nObjecte;
+  document.getElementById("quantitat").value = articleInfo.nQuantitat; 
+  document.getElementById("estat").value = articleInfo.nEstat; //done loading
+  loadingEnd();
+}).getArticleById(params.artID);
+
+}
+
+function  editArticle(){
+  loadingStart();
+var articleInfo = {};
+  articleInfo.nAula = document.getElementById("aula").value;
+  //articleInfo.nArticle = document.getElementById("article").value;
+  articleInfo.nTipus = document.getElementById("tipus").value;
+  articleInfo.nObjecte = document.getElementById("objecte").value;
+  articleInfo.nQuantitat = document.getElementById("quantitat").value;
+  articleInfo.nEstat = document.getElementById("estat").value;
+
+var id = document.getElementById("article-id").value;
+
+google.script.run.withSuccessHandler(function(res){
+  //Pone en blanco el formulario de edición
+    document.getElementById("aula").value = "";
+    //document.getElementById("article").value = "";
+    document.getElementById("tipus").value="";
+    document.getElementById("objecte").value="";
+    document.getElementById("quantitat").value = "";
+    document.getElementById("estat").value = "";
+    document.getElementById("article-id").value = "";
+    document.getElementById("save-success-message").classList.remove("invisible");
+  loadingEnd();
+  setTimeout(function(){
+    document.getElementById("save-success-message").classList.add("invisible");
+    },3000)
+
+}).editArticleById(id,articleInfo);
+
+}
+
+function addArticle(){
+loadingStart();
+var articleInfo = {};
+  articleInfo.nAula = document.getElementById("aula").value;
+  //articleInfo.nArticle = document.getElementById("article").value;
+  articleInfo.nTipus = document.getElementById("tipus").value;
+  articleInfo.nObjecte = document.getElementById("objecte").value;
+  articleInfo.nQuantitat = document.getElementById("quantitat").value;
+  articleInfo.nEstat = document.getElementById("estat").value;
+  google.script.run.withSuccessHandler(function(){
+    document.getElementById("aula").value = "";
+    //document.getElementById("article").value = "";
+    document.getElementById("tipus").value="";
+    document.getElementById("objecte").value="";
+    document.getElementById("quantitat").value = "";
+    document.getElementById("estat").value = "";
+    document.getElementById("save-success-message").classList.remove("invisible");
+    loadingEnd();
+  setTimeout(function(){
+    document.getElementById("save-success-message").classList.add("invisible");
+    },3000);
+  }).addArticle(articleInfo);
+
+}
+
+
+
+ 
+/* function addFactura(){
+//const enviaInvitaciones = document.getElementById("formEnvioAvisoActivitat");
+let facturaInfo = {};
+  facturaInfo.timestap = document.getElementById("timestamp-factura").value;
+  facturaInfo.usuari = document.getElementById("usuari-factura").value;
+  facturaInfo.selectprogrames = document.getElementById("select-programes").value;
+  facturaInfo.selectdepartaments = document.getElementById("select-departaments").value;
+  facturaInfo.infoconcepte = document.getElementById("info-concepte").value;
+  facturaInfo.selecttipus = document.getElementById("select-tipus").value;
+  facturaInfo.pagamentusuaripendent = document.getElementById("pagament-usuari-pendent").value;
+  facturaInfo.pagamentusuarifet = document.getElementById("pagament-usuari-fet").value;
+  facturaInfo.pagamentdatafactura = document.getElementById("data-factura").value;
+  facturaInfo.nomempresa = document.getElementById("nom-empresa").value;
+  facturaInfo.cifempresa = document.getElementById("cif-empresa").value;
+  facturaInfo.numfactura = document.getElementById("num-factura").value;
+  facturaInfo.importefactura = document.getElementById("importe-factura").value;
+  facturaInfo.conceptefactura = document.getElementById("concepte-factura").value;
+  facturaInfo.arxiufactura = document.getElementById("arxiu-factura").value;
+  facturaInfo.observacionsfactura = document.getElementById("observacions-factura").value;
+  facturaInfo.selecttipuspagament = document.getElementById("select-tipus-pagament").value; 
+
+
+
+ //if (enviaInvitaciones.checked){activitatInfo.enviaInvitaciones = 'TRUE' }else{facturaInfo.organizador = document.getElementById("formOrganizadorActivitat").value;
+  //eventoInfo.color = ("4");
+  //eventoInfo.fechaCreacion = new Date();            
+
+google.script.run.withSuccessHandler(function(){
+
+//document.getElementById("timestamp-factura").value = " ";
+//document.getElementById("usuari-factura").value = " ";
+document.getElementById("select-programes").value = " ";
+document.getElementById("select-departaments").value = " ";
+document.getElementById("info-concepte").value = " ";
+document.getElementById("select-tipus").value = " ";
+document.getElementById("pagament-usuari-pendent").value = " ";
+document.getElementById("pagament-usuari-fet").value = " ";
+document.getElementById("data-factura").value = " ";
+document.getElementById("nom-empresa").value = " ";
+document.getElementById("cif-empresa").value = " ";
+document.getElementById("num-factura").value = " ";
+document.getElementById("importe-factura").value = " ";
+document.getElementById("concepte-factura").value = " ";
+//document.getElementById("arxiu-factura").value = " ";
+document.getElementById("observacions-factura").value = " ";
+document.getElementById("select-tipus-pagament").value = " "; 
+
+
+
+      document.getElementById("save-success-message").classList.remove("d-none");
+
+    loadingEnd();
+  setTimeout(function(){
+    document.getElementById("save-success-message").classList.add("d-none");
+    },2000);
+  }).addFactura(facturaInfo);
+ 
+} */
+
+
+/* function  addFactura(){
+//loadingStart();
+let facturaInfo = {};
+  facturaInfo.timestap = document.getElementById("timestamp-factura").value;
+  facturaInfo.usuari = document.getElementById("usuari-factura").value;
+  facturaInfo.selectprogrames = document.getElementById("select-programes").value;
+  facturaInfo.selectdepartaments = document.getElementById("select-departaments").value;
+  facturaInfo.infoconcepte = document.getElementById("info-concepte").value;
+  facturaInfo.selecttipus = document.getElementById("select-tipus").value;
+  facturaInfo.pagamentusuaripendent = document.getElementById("pagament-usuari-pendent").value;
+  facturaInfo.pagamentusuarifet = document.getElementById("pagament-usuari-fet").value;
+  facturaInfo.pagamentdatafactura = document.getElementById("data-factura").value;
+  facturaInfo.nomempresa = document.getElementById("nom-empresa").value;
+  facturaInfo.cifempresa = document.getElementById("cif-empresa").value;
+  facturaInfo.numfactura = document.getElementById("num-factura").value;
+  facturaInfo.importefactura = document.getElementById("importe-factura").value;
+  facturaInfo.conceptefactura = document.getElementById("concepte-factura").value;
+  facturaInfo.arxiufactura = document.getElementById("arxiu-factura").value;
+  facturaInfo.observacionsfactura = document.getElementById("observacions-factura").value;
+  facturaInfo.selecttipuspagament = document.getElementById("select-tipus-pagament").value; 
+google.script.run
+.addFactura(facturaInfo);
+
+//loadingEnd();
+} */
+
+
+
+
+
+
+
+
+      </script>

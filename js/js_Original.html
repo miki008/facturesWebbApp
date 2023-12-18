@@ -1,0 +1,339 @@
+ <script>
+ //FUNCIONES SEARCH  
+   function setDataFormSearch(){
+ 
+ //loadingEnd();
+google.script.run.withSuccessHandler(function(dataFactures){
+data = dataFactures.slice();
+//loadingEnd();
+//document.getElementById("formSearch").classList.remove("hide");
+}).listarFactures();
+}
+
+
+function search(){
+//loadingStart();
+const searchInput = document.getElementById("searchInput").value.toString().toLowerCase().trim();
+const searchWords = searchInput.split(/\s+/);
+//const searchColumns = [1,2,3,4,5,6,7,8,9,10,11];
+const searchColumns = [0,1,2,3,4,5,6,7,8,9,10,12,13,14,15];
+
+//and or
+
+const resultsArray = searchInput === "" ? [] : data.filter(function(r){
+  return searchWords.every(function(word){
+    return searchColumns.some(function(colIndex){
+      return r[colIndex].toString().toLowerCase().indexOf(word) !== -1
+      
+    });
+  });
+});
+
+//Obtenemos el número de registros que coinciden para crear
+// y mostrar un contador
+const recordCount = searchInput === "" ? "" : resultsArray.length;
+document.getElementById("searchCounter").textContent = recordCount;
+
+let tableBody = document.getElementById("tableBody-factures-seleccionades");
+let template = document.getElementById("rowTemplate-factures-seleccionades");
+let templateContent = template.content;
+
+tableBody.innerHTML = " ";
+
+resultsArray.forEach (function(factura){
+  const tr = templateContent.cloneNode(true);
+  
+  const numFacturaIdCol = tr.querySelector(".numFacturaId");
+  const formaPagamentCol = tr.querySelector(".formaPagament"); 
+  const dataPagamentCol = tr.querySelector(".dataPagament");
+  const inputEcoibCol = tr.querySelector(".inputEcoib");
+  const departamentProgramaCol = tr.querySelector(".departamentPrograma");
+  const nomEmpresaCol = tr.querySelector(".nomEmpresa");
+  const cifEmpresaCol = tr.querySelector(".cifEmpresa");
+  const importFacturaCol = tr.querySelector(".importFactura");
+  const dataFacturaCol = tr.querySelector(".dataFactura");
+  const numFacturaCol = tr.querySelector(".numFactura");
+  const linkFacturaCol = tr.querySelector(".linkFactura");
+  //const linkFacturaCol = tr.querySelector(".ver-Factura");
+  const concepteFacturaCol = tr.querySelector(".concepteFactura");
+  const pagamentUsuariCol = tr.querySelector(".pagamentUsuari"); 
+  const observacionsFacturaCol = tr.querySelector(".observacionsFactura");
+  const buttonsButton = tr.querySelector(".buttons"); 
+
+numFacturaIdCol.textContent = factura[0];
+//formaPagamentCol.textContent = factura[1];
+//dataPagamentCol.textContent = factura[2];
+inputEcoibCol.textContent =factura[3];
+//departamentProgramaCol.textContent = factura[4];
+nomEmpresaCol.textContent = factura[5];
+cifEmpresaCol.textContent = factura[6];
+importFacturaCol.textContent = factura[7];
+dataFacturaCol.textContent = factura[8];
+numFacturaCol.textContent = factura[9];
+//linkFacturaCol.textContent = factura[10];
+//linkFacturaCol.dataset.linkFactura= factura[10];
+linkFacturaCol.textContent= factura[10];
+concepteFacturaCol.textContent = factura[11];
+//pagamentUsuariCol.textContent = factura[12];
+observacionsFacturaCol.textContent = factura[13];
+buttonsButton.dataset.facturaId = factura[15];
+
+tableBody.appendChild(tr);
+});
+
+
+//loadingEnd(); 
+}
+
+//FIN BUSCAR UNA FACTURA
+
+/* //FUNCIONES SEARCH
+function setDataFormSearch(){
+loadingStart();
+google.script.run.withSuccessHandler(function(dataReturned){
+data = dataReturned.slice();
+loadingEnd();
+}).getDataForSearch();
+}
+
+function search(){
+
+var searchInput = document.getElementById("searchInput").value.toString().toLowerCase().trim();
+var searchWords = searchInput.split(/\s+/);
+var searchColumns = [1,2];
+//and or
+ 
+var resultsArray = searchInput === "" ? [] : data.filter(function(r){
+
+    return searchWords.every(function(word){ 
+      return searchColumns.some(function(colIndex) {
+         return r[colIndex].toString().toLowerCase().indexOf(word) !== -1
+
+    });
+  });
+
+});
+var recordCount = searchInput === "" ? "" : resultsArray.length;
+document.getElementById("searchCounter").textContent = recordCount;
+
+var searchResultsBox = document.getElementById("searchResults");
+var templateBox = document.getElementById("rowTemplate");
+var template = templateBox.content;
+
+searchResultsBox.innerHTML = "";
+
+resultsArray.forEach(function(r){
+
+var tr = template.cloneNode(true);
+var artIDColumn = tr.querySelector(".artID");
+var nAulaColumn = tr.querySelector(".nAula");
+var nTipusColumn = tr.querySelector(".nTipus");
+var nObjecteColumn = tr.querySelector(".nObjecte");
+//var nArticleColumn = tr.querySelector(".nArticle");
+var nQuantitatColumn = tr.querySelector(".nQuantitat");
+var nEstatColumn = tr.querySelector(".nEstat");
+var deleteButton = tr.querySelector(".delete-button");
+var editButton = tr.querySelector(".edit-button");
+
+
+artIDColumn.textContent = r[0];
+deleteButton.dataset.articleId = r[0];
+editButton.dataset.articleId = r[0];
+nAulaColumn.textContent = r[1];
+//nArticleColumn.textContent = r[2];
+nTipusColumn.textContent = r[2];
+nObjecteColumn.textContent = r[3];
+nQuantitatColumn.textContent = r[4];
+nEstatColumn.textContent = r[5];
+searchResultsBox.appendChild(tr);
+
+});
+}  */
+//FIN FUNCIONES SEARCH
+
+// FUNCIONES ENCARGADAS DE MOSTRAR TODAS LAS FACTURAS
+ function listarFactures(){
+  loadingStart();
+  google.script.run
+  .withSuccessHandler(actualizarFactures)
+  .listarFactures();
+ //loadingEnd();
+}
+
+function actualizarFactures(dataFactures){
+//loadingStart();
+let tableBody = document.getElementById("tableBody-factures");
+let template = document.getElementById("rowTemplate-factures");
+let templateContent = template.content;
+
+tableBody.innerHTML = " ";
+
+dataFactures.forEach (function(factura){
+  const tr = templateContent.cloneNode(true);
+
+  const numFacturaIdCol = tr.querySelector(".numFacturaId");
+  /* const formaPagamentCol = tr.querySelector(".formaPagament"); */
+  /* const dataPagamentCol = tr.querySelector(".dataPagament"); */
+/*   const inputEcoibCol = tr.querySelector(".inputEcoib"); */
+ /*  const departamentProgramaCol = tr.querySelector(".departamentPrograma"); */
+  const nomEmpresaCol = tr.querySelector(".nomEmpresa");
+  const cifEmpresaCol = tr.querySelector(".cifEmpresa");
+  const linkFacturaCol = tr.querySelector(".linkFactura"); 
+ /*  const importFacturaCol = tr.querySelector(".importFactura");
+  const dataFacturaCol = tr.querySelector(".dataFactura");
+  const numFacturaCol = tr.querySelector(".numFactura");
+  const linkFacturaCol = tr.querySelector(".linkFactura"); 
+  const concepteFacturaCol = tr.querySelector(".concepteFactura"); */
+ /*  const pagamentUsuariCol = tr.querySelector(".pagamentUsuari"); */
+/*   const observacionsFacturaCol = tr.querySelector(".observacionsFactura"); */
+  const buttonsButton = tr.querySelector(".buttons"); 
+
+numFacturaIdCol.textContent = factura[0];
+/* formaPagamentCol.textContent = factura[1]; */
+/* dataPagamentCol.textContent = factura[2]; */
+//inputEcoibCol.textContent =factura[3]; 
+//departamentProgramaCol.textContent = factura[4];
+nomEmpresaCol.textContent = factura[5];
+cifEmpresaCol.textContent = factura[6];
+//importFacturaCol.textContent = factura[7];
+//dataFacturaCol.textContent = factura[8];
+//numFacturaCol.textContent = factura[9];
+linkFacturaCol.textContent = factura[10];
+//concepteFacturaCol.textContent = factura[11];
+/* pagamentUsuariCol.textContent = factura[12]; */
+//observacionsFacturaCol.textContent = factura[13];
+//buttonsButton.dataset.facturaId = factura[15];
+
+tableBody.appendChild(tr);
+});
+loadingEnd();
+}
+// FIN FUNCIONES MOSTRAR FACTURAS 
+
+// FIN FUNCIONES ENCARGADAS DE MOSTRAR TODAS LAS FACTURAS
+
+//OBTENER FACTURA PDF
+/* function abrirFacturaPDF(button){
+
+
+//const buttonsButton = tr.querySelector(".buttons");
+//let valor = button.querySelectorAll(".linkFactura");
+//alert(document.getElementById("buttons").textContent = buttonsButton);
+//const valor = document.getElementById("verFactura").innerText;
+
+  window.open(button, "Factura", "width=600, height=400")
+  //console.log(button);
+} */
+
+// FIN FUNCIONES MOSTRAR FACTURAS 
+
+/* function displayConfirmationDelete(e){
+if(e.target.dataset.buttonState === "delete"){
+e.target.previousElementSibling.classList.remove("d-none");
+e.target.textContent = "Cancel·la";
+e.target.dataset.buttonState = "cancel";
+} else {
+e.target.previousElementSibling.classList.add("d-none");
+e.target.textContent = "Esborrar";
+e.target.dataset.buttonState = "delete";
+ }
+}
+
+function deleteArticle(e){
+
+var artID = e.target.dataset.articleId;
+ loadingStart();
+google.script.run.withSuccessHandler(function(){
+ e.target.closest(".result-box").remove();
+ var ids = data.map(function(r){return r[0].toString().toLowerCase() });
+ var index = ids.indexOf(artID.toString().toLowerCase());
+ data.splice(index,1);
+  loadingEnd();
+}).deleteById(artID);
+
+}
+
+function afterEditViewLoads(params){
+//artID: e.target.dataset.articleId
+//loading
+loadingStart();
+document.getElementById("article-id").value = params.artID;
+google.script.run.withSuccessHandler(function(articleInfo){
+  document.getElementById("aula").value = articleInfo.nAula;
+  //document.getElementById("article").value = articleInfo.nArticle;
+  document.getElementById("tipus").value = articleInfo.nTipus;
+  document.getElementById("objecte").value = articleInfo.nObjecte;
+  document.getElementById("quantitat").value = articleInfo.nQuantitat; 
+  document.getElementById("estat").value = articleInfo.nEstat; //done loading
+  loadingEnd();
+}).getArticleById(params.artID);
+
+}
+
+function  editArticle(){
+  loadingStart();
+var articleInfo = {};
+  articleInfo.nAula = document.getElementById("aula").value;
+  //articleInfo.nArticle = document.getElementById("article").value;
+  articleInfo.nTipus = document.getElementById("tipus").value;
+  articleInfo.nObjecte = document.getElementById("objecte").value;
+  articleInfo.nQuantitat = document.getElementById("quantitat").value;
+  articleInfo.nEstat = document.getElementById("estat").value;
+
+var id = document.getElementById("article-id").value;
+
+google.script.run.withSuccessHandler(function(res){
+  //Pone en blanco el formulario de edición
+    document.getElementById("aula").value = "";
+    //document.getElementById("article").value = "";
+    document.getElementById("tipus").value="";
+    document.getElementById("objecte").value="";
+    document.getElementById("quantitat").value = "";
+    document.getElementById("estat").value = "";
+    document.getElementById("article-id").value = "";
+    document.getElementById("save-success-message").classList.remove("invisible");
+  loadingEnd();
+  setTimeout(function(){
+    document.getElementById("save-success-message").classList.add("invisible");
+    },3000)
+
+}).editArticleById(id,articleInfo);
+
+}
+
+function addArticle(){
+loadingStart();
+var articleInfo = {};
+  articleInfo.nAula = document.getElementById("aula").value;
+  //articleInfo.nArticle = document.getElementById("article").value;
+  articleInfo.nTipus = document.getElementById("tipus").value;
+  articleInfo.nObjecte = document.getElementById("objecte").value;
+  articleInfo.nQuantitat = document.getElementById("quantitat").value;
+  articleInfo.nEstat = document.getElementById("estat").value;
+  google.script.run.withSuccessHandler(function(){
+    document.getElementById("aula").value = "";
+    //document.getElementById("article").value = "";
+    document.getElementById("tipus").value="";
+    document.getElementById("objecte").value="";
+    document.getElementById("quantitat").value = "";
+    document.getElementById("estat").value = "";
+    document.getElementById("save-success-message").classList.remove("invisible");
+    loadingEnd();
+  setTimeout(function(){
+    document.getElementById("save-success-message").classList.add("invisible");
+    },3000);
+  }).addArticle(articleInfo);
+
+}
+ */
+
+
+
+
+
+
+
+
+
+
+      </script>

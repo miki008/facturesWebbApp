@@ -1,0 +1,71 @@
+<!-- <h1>Cercar Factura</h1> -->
+
+<!-- <h4>Cercar</h4> -->
+
+  
+  
+<!-- <div class="input-group mb-3">
+   <input type="text" class="form-control" id="searchInput" placeholder="cercar...">
+  <div class="input-group-append">
+    <span class="input-group-text" id="searchCounter"></span>
+  </div>
+</div> -->
+
+   
+  <div class="input-group mb-3">
+  <input type="text" class="form-control searchInput" id="searchInput" placeholder="cercar..." aria-label="cercar..." aria-describedby="searchCounter">
+  <span class="input-group-text" id="searchCounter"></span>
+</div>
+
+<div class="table-responsive">
+<table class="table table-hover table-sm">
+<thead>
+  <tr>
+<th scope="col" class="text-center pr-2">NF</th>
+<!-- <th scope="col">Forma Pag.</th> -->
+<!-- <th scope="col">Data Pag.</th> -->
+<th scope="col text-center pr-2">Ecoib</th>
+<!-- <th scope="col">Dep./ Prog.</th> -->
+<th scope="col">Empresa</th>
+<th scope="col">CIF</th>
+<th scope="col">Import</th>
+<th scope="col">Data</th>
+<th scope="col">N.Factura</th>
+<!-- <th scope="col">Link Factura</th> -->
+<th scope="col">Concepte</th>
+<th scope="col">Pagament</th>
+<th scope="col">Observacions</th>
+<!-- <th scope="col">Responsable</th> -->
+<th scope="col">Accions</th>
+<th class="d-none" scope="col">Accions</th>
+</tr>
+</thead>
+<tbody id="tableBody-factures-seleccionades">
+
+</tbody>
+</table>
+</div>
+<template id="rowTemplate-factures-seleccionades">
+
+  <tr class="result-box">
+    <th class="template-numFacturaId text-center pr-2" scope="row"></th>
+      <!--  <td class="template-formaPagament"></td>  -->
+       <!-- <td class="template-dataPagament"></td>  -->
+       <td class="template-inputEcoib text-center pr-2"><i class="bi bi-check-lg d-none "></i><i class="bi bi-x-lg d-none"></i></td> 
+      <!--  <td class="template-departamentPrograma"></td>  -->
+      <td class="template-nomEmpresa"></td>
+      <td class="template-cifEmpresa"></td>
+      <td class="template-importFactura"></td>
+      <td class="template-dataFactura"></td>
+      <td class="template-numFactura"></td>
+      <!-- <td class="template-linkFactura text-center"><i class="bi bi-eye ver-Factura" role="button"></i></td>  -->
+      <td class="template-concepteFactura"></td>
+       <td class="template-pagamentUsuari"></td> 
+      <td class="template-observacionsFactura"></td>
+      <!-- <td class="template-responsableFactura"></td>  -->
+      <td class="text-center template-buttons"><i class="bi bi-eye verPDF me-2 button-ver"  role="button" ></i><i class="bi bi-pencil-square button-edit me-2" role="button" data-bs-toggle="modal" data-bs-target="#editModalFactura"></i><i class="bi bi-trash button-delete" role ="button"></i></td>
+      <td class="template-linkFactura d-none text-center verFactura" id="verFactura"></td>
+      
+      
+</tr> 
+</template>

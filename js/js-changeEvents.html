@@ -1,0 +1,32 @@
+<script>
+
+function inputEventHandler(e){
+//Cuando cambia de valor el select programa-departament.
+/*  if(e.target.matches("select-programes-modal")){
+alert("mikimiki");
+document.getElementById('select-departaments-modal').disabled = false;
+loadSelectDepartaments();
+  } */
+/*     if(e.target.matches("#select-programes-modal")){
+alert("mikimiki");
+//document.getElementById('select-departaments-modal').disabled = false;
+//loadSelectDepartaments();
+  }  */
+
+if (e.target.matches(".file")){
+//console.log("Error")
+
+let miFormulario = document.getElementById("myForm");
+// Agregar un listener para el evento 'submit'
+event.preventDefault(); // Evitar el comportamiento por defecto del envío del formulario
+enviarform(miFormulario); // Llamar a la función que maneja el envío del formulario 
+
+
+}
+
+}
+
+
+
+document.getElementById("app").addEventListener("change",inputEventHandler); 
+</script> 

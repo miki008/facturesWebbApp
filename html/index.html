@@ -1,0 +1,319 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <base target="_top">
+    <!-- Required meta tags -->
+ <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<script src="https://kit.fontawesome.com/dbd1c64705.js" crossorigin="anonymous"></script>
+    <?!= include("css/cdn"); ?>
+    <?!= include("css/estilos-css"); ?>
+
+  </head>
+  <body>
+    <div class="container">
+      <nav id="navigation" class="navbar sticky-top mb-3">
+        <ul class="nav nav-tabs main-nav">
+          <li class="nav-item">
+            <div class="nav-link active" id="inici-link">Inici</div>
+          </li>
+          <li class="nav-item">
+            <div class="nav-link" id="afegir-factura-link">Afegir Factura</div>
+          </li>
+          <li class="nav-item">
+            <div class="nav-link" id="mostrar-factures-link">Mostrar Factures</div>
+          </li>
+          <li class="nav-item">
+            <div class="nav-link" id="cercar-factura-link">Cercar Factura</div>
+          </li>
+        </ul>
+      </nav>
+      <div id="app">
+  
+      </div>
+      <!--div app-->
+  </div> 
+  <!--div container-->
+      <div id="loading" class="invisible d-flex justify-content-center align-items-center ">
+        <div id="role" class="spinner-grow" style="width: 3rem; height: 3rem;" role="status">
+          <span class="sr-only">Loading...</span>
+        </div>
+        <!--div loading-->
+      </div>
+      <!--div role-->
+    
+
+<!-- Modal -->
+<div class="modal fade" id="editModalFactura" tabindex="-1" aria-labelledby="editModalFacturaLabel" aria-hidden="true">
+  <div class="modal-dialog modal-xl">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="editModalFacturaLabel">Mode Edició Factura</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <!-- <h1>addFactura</h1> -->
+
+<div class="edit-factura-form">
+
+  <!-- <div class="form-group">
+    <label for="factura-id" class="form-label">Factura ID</label>
+    <input type="text" class="form-control" id="factura-id" readonly>
+  </div>
+  <div class="form-group">
+    <label for="num-factura-id" class="form-label">N.Factura</label>
+    <input type="text" class="form-control" id="num-factura" readonly>
+  </div> -->
+  <div class="form-group">
+    <div class="row">
+      <div class="col-6">
+        <label for="registro-factura-modal" class="form-label">Registre</label>
+        <input type="text" class="form-control" id="registro-factura-modal" readonly>
+      </div>
+      <div class="col-6">
+        <label for="usuari-factura-modal" class="form-label">Usuari</label>
+        <input type="text" class="form-control" id="usuari-factura-modal" readonly>
+      </div>
+    </div>
+  </div>
+  <!--Form group-->
+ 
+  
+  
+  
+ 
+  <fieldset class="mt-3 border border-secondary rounded-3 border-3">
+  <legend>Informació Comptable</legend>
+    <div class="row mt-3">
+      <!--Departament o Programa-->
+      <div class="col-4 me-auto">
+        <div class="form-floating">
+          <select class="form-select select-programes" id="select-programes-modal" aria-label="Programa">
+           <!--  <option selected>Departament/ Programa</option>
+            <option value="1">One</option>
+            <option value="2">Two</option>
+            <option value="3">Three</option> -->
+          </select>
+          <label for="select-programes-modal">Selecciona una opció</label>
+        </div>
+      </div>
+      <!--Fi Departament o Programa-->
+      <!-- <div class="row mt-3"> -->
+      <!--Llistat Departaments o Programes-->
+      <div class="col-4 me-auto">
+        <div class="form-floating">
+          <select class="form-select select-departaments" id="select-departaments-modal" aria-label="Departament" disabled>
+           <!--  <option selected>Departament/ Programa</option>
+            <option value="1">One</option>
+            <option value="2">Two</option>
+            <option value="3">Three</option> -->
+          </select>
+          <label for="select-departaments-modal">Selecciona una opció</label>
+        </div>
+      </div>
+
+      <div class="col-4 me-auto">
+        <div class="form-floating mb-3">
+        <input type="text"  class="form-control" id="info-concepte-modal" placeholder="Comissió, programa, activitat, material, taller..." name="info-concepte">
+         <label for="info-concepte-modal">Comissió, activitat, material, taller...</label>
+        </div>
+      </div>
+
+    </div>
+      <!--Fi Departament o Programa-->
+
+      
+
+    <div class="row mt-3">
+      <div class="col-4 me-auto">
+        <div class="form-floating mb-3">
+          <select class="form-select select-tipus" id="select-tipus-modal" aria-label="Tipus document">
+               <!-- <option selected>Tipus document</option>
+                    <option value="1">Tiquet</option>
+                    <option value="2">Factura</option>
+                    <option value="3">Albarà</option>
+                    <option value="3">Abono</option> -->
+              </select>
+          <label for="select-tipus-modal">Selecciona document</label>
+        </div>
+      </div>
+    
+      <div class="form-check col-auto me-auto ">
+        <input class="form-check-input" type="radio" name="pagamentUsuariPendent" id="pagament-usuari-pendent-modal" checked>
+        <label class="form-check-label" for="pagament-usuari-pendent-modal" >Factura pendent de pagament</label>
+      </div>
+      <div class="form-check col-auto me-auto ">
+        <input class="form-check-input" type="radio" name="pagamentUsuariPendent" id="pagament-usuari-fet-modal">
+        <label class="form-check-label" for="pagament-usuari-fet-modal" >Factura pagada pel/ per la mestr@</label>
+      </div>
+    </div><!-- div Tipus i pagament -->
+  </fieldset>
+
+
+
+
+
+ <fieldset class="mt-3 border border-secondary rounded-3 border-3">
+  <legend>Dades Factura</legend>
+  <div class="form-group">
+    <div class="row mt-3">
+      <div class="col-auto me-auto mt-auto">
+        <div class="form-floating mb-3">
+          <input type="date" class="form-control" id="data-factura-modal">
+          <label for="data-factura-modal">Data Factura</label>
+        </div>
+      </div>
+  </div>
+
+  <div class="form-floating">
+    <div class="row mt-3">
+      <div class="col-6 me-auto">
+        <div class="form-floating mb-3">
+          <input type="text" class="form-control" id="nom-empresa-modal" placeholder="Nom Empresa">
+          <label for="nom-empresa-modal">Nom Empresa</label>
+        </div>
+      </div>
+      <div class="col-6 me-auto">
+        <div class="form-floating mb-3">
+          <input type="text" class="form-control" id="cif-empresa-modal" placeholder="CIF/NIF Empresa">
+          <label for="cif-empresa-modal">CIF/NIF Empresa</label>
+        </div>
+      </div>
+
+    </div>
+    <div class="form-group">
+      <div class="row mt-3">
+        <div class="col-3 me-auto">
+          <div class="form-floating mb-3">
+            <input type="text" class="form-control" id="num-factura-modal" placeholder="N.Factura">
+            <label for="num-factura-modal">N.Factura</label>
+          </div>
+        </div>
+
+        <div class="col-3 me-auto">
+          <div class="form-floating mb-3">
+            <input type="text" class="form-control" id="import-factura-modal" placeholder="Import €">
+            <label for="import-factura-modal">Import €</label>
+          </div>
+        </div>
+        <div class="col-6 me-auto">
+          <div class="form-floating mb-3">
+            <input type="text" class="form-control" id="concepte-factura-modal" placeholder="Concepte">
+            <label for="concepte-factura-modal">Concepte</label>
+          </div>
+
+        </div>
+      </div>
+    </div>
+ </fieldset>
+ <fieldset class="mt-3 border border-secondary rounded-3 border-3">
+  <legend>Informació Adjunta</legend>
+    <div class="form-floating">
+      <div class="row  mt-3">
+        <div class="input-group col-auto me-auto">
+          <input type="file" class="form-control" id="arxiu-factura-modal">
+          <label class="input-group-text" for="arxiu-factura-modal">Upload</label>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-floating mt-3">
+      <textarea class="form-control" placeholder="Observacions" id="observacions-factura-modal"></textarea>
+      <label for="observacions-factura-modal">Observacions</label>
+    </div>
+ </fieldset>
+
+  <fieldset class="mt-3 border border-secondary rounded-3 border-3">
+    <legend>Registre Comptable</legend>
+    <div class="row mt-3">
+      <div class="col-4 me-auto">
+        <div class="form-floating mb-3">
+          <select class="form-select select-tipus-pagament" id="select-tipus-pagament-modal" name="select-tipus-pagament-modal" aria-label="Tipus pagament">
+                 <!-- <option selected>Tipus document</option>
+                      <option value="1">Tiquet</option>
+                      <option value="2">Factura</option>
+                      <option value="3">Albarà</option>
+                      <option value="3">Abono</option> -->
+                </select>
+          <label for="select-tipus-pagament-modal">Selecciona tipus de pagament</label>
+        </div>
+      </div>
+  
+      <div class="col-4 me-auto mt-auto">
+        <div class="form-floating mb-3">
+          <input type="date" class="form-control" id="data-pagament-modal">
+          <label for="data-pagament-modal">Data Pagament</label>
+        </div>
+      </div>
+      <div class="col-4 me-auto">
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" value="" id="flexCheckEcoib-modal">
+          <label class="form-check-label" for="flexCheckEcoib-modal">
+      Factura Comptabilitzada a ECOIB
+    </label>
+        </div>
+      </div>
+    </div>
+  </fieldset>
+
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal -->
+<!-- <div class="modal fade enviarModal" id="enviarModal" tabindex="-1" aria-labelledby="enviarModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="enviarModalLabel">Modal title</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body" id = "modal-body">
+        <div class="mb-3 col">
+        <label for="nombreModal" class="form-label">Nombre</label>
+        <input class="form-control" type="text" id="nombreModal" name="nombreModal">
+      </div>
+       <div class="mb-3 col">
+        <label for="apellidosModal" class="form-label">Apellidos</label>
+        <input class="form-control" type="text" id="apellidosModal" name="apellidosModal">
+      </div>
+      <div class="mb-3 col">
+        <label for="fileModal" class="form-label">Seleccionar archivo</label>
+        <input class="form-control" type="text" id="fileModal" name="fileModal">
+      </div>
+       <div class="mb-3 col">
+        <img id="imagenprevia" />
+      </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal2" id = "save">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div> -->
+
+</div><!--div container-->
+
+    <!-- Bootstrap JavaScript -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
+   
+    <?!= include("js/js"); ?> 
+    <?!= include("js/js-changeEvents"); ?>
+    <?!= include("js/js-clickEvents"); ?> 
+    <?!= include("js/js-inputEvents"); ?> 
+    <?!= include("js/js-mainFacturesPendents"); ?>  
+    <?!= include("js/js-navClick"); ?>
+    <?!= include("js/js-searchFactures"); ?>
+    <?!= include("js/js-selects"); ?>
+    <?!= include("js/js-showFactures"); ?>
+    <?!= include("js/js-addFactures"); ?>
+    
+    
+    
+  </body>
+</html>
